@@ -1,21 +1,18 @@
 FROM ubuntu:18.04
 
-#Atualizando sistema operacional
+#Updating operating system
 RUN apt-get update && apt -y upgrade && apt-get -y dist-upgrade
 
-##Instalando pacotes essenciais
+##Installing essential packages
 RUN apt-get -y install software-properties-common curl bash-completion vim git
 
-#Configurações padrão do sistema operacional
-RUN ln -f -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-
-##Instalando NGINX
+##Installing NGINX
 RUN apt-get -y install nginx
 
-##Adicionando repositório do PHP
+##Adding PHP repository
 RUN add-apt-repository -y ppa:ondrej/php && apt update
 
-#Instalando PHP e extensões
+#Installing PHP and extensions
 RUN apt-get -y install php7.3-cli php7.3-common php7.3-fpm php7.3-mysql \
 php7.3-curl php7.3-dev php7.3-mbstring php7.3-gd php7.3-json php7.3-redis php7.3-xml php7.3-zip
 
@@ -25,17 +22,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Install xdebug
 RUN pecl install xdebug
 
-#Configurando Xdebug
+#Configuring Xdebug
 RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.3/fpm/php.ini
 RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.3/cli/php.ini
 
 # Install redis
 RUN pecl install redis
-
-#Configurando Redis para regenciar as sessões
-RUN echo "[Session]" >> /etc/php/7.3/fpm/php.ini
-RUN echo "session.save_handler = redis" >> /etc/php/7.3/fpm/php.ini
-RUN echo "session.save_path = tcp://redis:6379" >> /etc/php/7.3/fpm/php.ini
 
 # Quality tools
 RUN USERNAME=$('whoami') && composer global require squizlabs/php_codesniffer=*  phpcompatibility/php-compatibility=* \
