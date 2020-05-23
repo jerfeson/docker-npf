@@ -6,7 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
 
 ##Installing essential packages
-RUN apt-get -y install apt-utils software-properties-common curl bash-completion vim git supervisor
+RUN apt-get -y install apt-utils software-properties-common curl bash-completion vim git supervisor zip unzip
 
 ##Installing NGINX
 RUN apt-get -y install nginx
