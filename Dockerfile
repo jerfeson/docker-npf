@@ -31,7 +31,6 @@ RUN pecl install xdebug
 #Configuring Xdebug
 RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.3/fpm/php.ini
 RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.3/cli/php.ini
-RUN echo "xdebug.remote_enable=1" >> /etc/php/7.3/fpm/php.ini
 
 # Install redis
 RUN pecl install redis
@@ -51,14 +50,8 @@ RUN mkdir "/conf.d" && version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSIO
     && mv /tmp/blackfire/blackfire-*.so $(php -r "echo ini_get ('extension_dir');")/blackfire.so \
     && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > /etc/php/7.3/fpm/conf.d/blackfire.ini
 
-
 #Default operating system settings
 RUN ln -f -s /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
-
-#Configuring Redis to register sessions
-RUN echo "[Session]" >> /etc/php/7.3/fpm/php.ini
-RUN echo "session.save_handler = redis" >> /etc/php/7.3/fpm/php.ini
-RUN echo "session.save_path = tcp://redis:6379" >> /etc/php/7.3/fpm/php.ini
 
 # Clean up
 RUN rm -rf /tmp/pear \
@@ -66,16 +59,9 @@ RUN rm -rf /tmp/pear \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ADD ./supervisor.conf /etc/supervisor.conf
-
-# Override nginx's default config
-#ADD ./default.conf /etc/nginx/conf.d/default.conf
-
-## Override default nginx welcome page
-#COPY html /usr/share/nginx/html
-
 ## Add Scripts
 ADD ./start.sh /start.sh
 EXPOSE  80
 STOPSIGNAL SIGTERM
 #CMD ["/start.sh"]
-ENTRYPOINT echo $XDEBUG_CONFIG >> /etc/php/7.3/fpm/php.ini && service php7.3-fpm start && nginx -g "daemon off;"
+ENTRYPOINT service php7.3-fpm start && nginx -g "daemon off;"
