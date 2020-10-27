@@ -2,7 +2,6 @@ FROM ubuntu:20.04
 
 #Sem interação humana
 ARG DEBIAN_FRONTEND=noninteractive
-ARG XDEBUG_CONFIG
 
 #Updating operating system
 RUN apt-get update && apt-get -y upgrade && apt-get -y dist-upgrade
@@ -33,9 +32,6 @@ RUN pecl install xdebug redis
 #Configuring Xdebug
 RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.3/fpm/php.ini
 RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.3/cli/php.ini
-
-RUN echo $XDEBUG_CONFIG >> /etc/php/7.3/fpm/php.ini
-RUN echo $XDEBUG_CONFIG >> /etc/php/7.3/cli/php.ini
 
 # Clean up
 RUN rm -rf /tmp/pear \
