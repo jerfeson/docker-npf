@@ -5,7 +5,8 @@ This is the Git repository of the Docker image for nginx with PHP FPM. See a Hub
 ### Versioning
 | Docker Tag | GitHub Release | Nginx Version | PHP Version | ubuntu Version |
 |-----|-------|-----|--------|--------|
-| php73 | php73 Branch |1.17.9 | 7.3.x | 18.04 |
+| php73 | php73 Branch |1.17.9 | 7.4.x | 20.04 |
+| php74 | php74 Branch |1.17.9 | 7.4.x | 20.04 |
 
 # Contributing
 
