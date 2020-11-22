@@ -6,7 +6,7 @@ See a Hub page to get or read me about using a Docker image and information abou
 ## Running
 To run the container:
 ```
-$ sudo docker run -d jerfeson/npf:php73
+$ sudo docker run -d jerfeson/npf:php74
 ```
 
 Default web root:

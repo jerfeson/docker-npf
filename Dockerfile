@@ -16,8 +16,8 @@ RUN apt-get -y install nginx
 RUN add-apt-repository -y ppa:ondrej/php && apt-get update
 
 #Installing PHP and extensions
-RUN apt-get -y install php7.3-cli php7.3-common php7.3-fpm php7.3-mysql \
-php7.3-curl php7.3-dev php7.3-mbstring php7.3-gd php7.3-json php7.3-redis php7.3-xml php7.3-zip php7.3-intl
+RUN apt-get -y install php7.4-cli php7.4-common php7.4-fpm php7.4-mysql \
+php7.4-curl php7.4-dev php7.4-mbstring php7.4-gd php7.4-json php7.4-redis php7.4-xml php7.4-zip php7.4-intl
 
 # Install Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -30,8 +30,8 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN pecl install xdebug redis
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.3/fpm/php.ini
-RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.3/cli/php.ini
+RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.4/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/7.4/cli/php.ini
 
 # Clean up
 RUN rm -rf /tmp/pear \
@@ -40,4 +40,4 @@ RUN rm -rf /tmp/pear \
 
 EXPOSE  80
 
-CMD service php7.3-fpm start && nginx -g "daemon off;"
+CMD service php7.4-fpm start && nginx -g "daemon off;"
