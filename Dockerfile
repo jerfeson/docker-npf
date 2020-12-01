@@ -26,8 +26,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN pecl install xdebug redis
 
 #Configuring Xdebug
-RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/8.0/fpm/php.ini
-RUN echo "zend_extension=/usr/lib/php/20180731/xdebug.so" >> /etc/php/8.0/cli/php.ini
+RUN echo "zend_extension=/usr/lib/php/20200930/xdebug.so" >> /etc/php/8.0/fpm/php.ini
+RUN echo "zend_extension=/usr/lib/php/20200930/xdebug.so" >> /etc/php/8.0/cli/php.ini
 
 
 # Clean up
