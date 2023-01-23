@@ -6,7 +6,7 @@ See a Hub page to get or read me about using a Docker image and information abou
 ## Running
 To run the container:
 ```
-$ sudo docker run -d jerfeson/npf:php74
+$ sudo docker run -d ThalesA/npf:php74
 ```
 
 Default web root:
@@ -20,4 +20,7 @@ welcome to discuss a bugs, features and ideas.
 
 # License
 
- jerfeson/docker-npf  is release under the MIT license.
+ 
+ Créditos ao https://github.com/jerfeson/.
+ 
+ ThalesA/docker-npf  is release under the MIT license.
